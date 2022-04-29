@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './App.css';
+// import "./App.css";
 
+// import ProjectScreen from "screens/project-list";
+import ReactList from "./screens/practice/react-list";
 function App() {
-  return (
-   <div></div>
-  )
+  return <ReactList />;
 }
 
 export default App;
