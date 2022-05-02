@@ -13,6 +13,7 @@ interface ListProps {
 }
 const List = (props: ListProps) => {
   const { projects, users } = props;
+  console.log(projects);
   return (
     <table>
       <thead>

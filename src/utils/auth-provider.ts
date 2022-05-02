@@ -2,8 +2,7 @@ import { User } from "screens/project-list/Search";
 
 const provider_token = "__auth_provider_token__";
 const baseURL = process.env.REACT_APP_API_URL;
-export const getToken = (token: string) =>
-  window.localStorage.getItem(provider_token);
+export const getToken = () => window.localStorage.getItem(provider_token);
 export const handleUserResponse = ({ user }: { user: User }) => {
   window.localStorage.setItem(provider_token, user.token || "");
   return user;
