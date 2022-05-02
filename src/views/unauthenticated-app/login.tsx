@@ -2,7 +2,7 @@ import { useAuth } from "context/auth-context";
 import React, { FormEvent } from "react";
 
 export default function LoginScreen() {
-  const { user, login } = useAuth();
+  const { login } = useAuth();
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
@@ -13,12 +13,6 @@ export default function LoginScreen() {
   };
   return (
     <form onSubmit={onSubmit}>
-      {user ? (
-        <div>
-          {user.name}
-          {user.token}
-        </div>
-      ) : null}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id="username" />
