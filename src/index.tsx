@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { loadDevTools } from "jira-dev-tool";
 import AppProvider from "./context/index";
+import "antd/dist/antd.css";
 loadDevTools(() => {
   const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement

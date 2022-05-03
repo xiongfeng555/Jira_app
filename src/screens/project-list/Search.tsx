@@ -1,4 +1,5 @@
 import React from "react";
+import { Input, Select } from "antd";
 export interface User {
   id: number;
   name: string;
@@ -19,7 +20,8 @@ export default function search(props: SearchProps) {
   const { params, setParams, users } = props;
   return (
     <div>
-      <input
+      <Input
+        style={{ width: "50%", margin: "20px -4px 40px 0" }}
         type="text"
         onChange={(evt) =>
           setParams({
@@ -29,23 +31,24 @@ export default function search(props: SearchProps) {
         }
       />
       &nbsp;
-      <select
-        onChange={(evt) =>
+      <Select
+        defaultValue="负责人"
+        onChange={(value) =>
           setParams({
             ...params,
-            personId: evt.target.value,
+            personId: value,
           })
         }
       >
-        <option value="">负责人</option>
+        <Select.Option value="">负责人</Select.Option>
         {users.map((item) => {
           return (
-            <option value={item.id} key={item.id}>
+            <Select.Option value={item.id} key={item.id}>
               {item.name}
-            </option>
+            </Select.Option>
           );
         })}
-      </select>
+      </Select>
     </div>
   );
 }
