@@ -1,5 +1,5 @@
 import * as auth from "../utils/auth-provider";
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { User } from "screens/project-list/Search";
 import { http } from "utils/http";
 interface userForm {
@@ -29,7 +29,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = (form: userForm) =>
     auth.register(form).then((user) => setUser(user));
   const logout = () => auth.logout().then(() => setUser(null));
-  bootstrapUser().then((user) => setUser(user));
+  useEffect(() => {
+    bootstrapUser().then((user) => setUser(user));
+  }, []);
+
   return (
     <AuthContext.Provider
       children={children}
