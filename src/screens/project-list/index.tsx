@@ -3,6 +3,7 @@ import { cleanObject, useDebounce } from "utils";
 import List from "./List";
 import Search from "./Search";
 import { useHttp } from "utils/http";
+import styled from "@emotion/styled";
 export default function ProjectScreen() {
   const [params, setParams] = useState({
     name: "",
@@ -31,9 +32,13 @@ export default function ProjectScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <Search params={params} setParams={setParams} users={users} />
       <List projects={projects} users={users} />
-    </div>
+    </Container>
   );
 }
+const Container = styled.div`
+  padding: 2rem;
+`;
