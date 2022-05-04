@@ -16,9 +16,9 @@ export default function UnAuthenticatedApp() {
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
         {isRegister ? <RegisterScreen /> : <LoginScreen />}
         <Divider />
-        <a onClick={() => setRegister(!isRegister)} href="javascript:;">
+        <Button onClick={() => setRegister(!isRegister)} type="link">
           切换到{isRegister ? "已经有账号了，直接登录" : "没有账号？注册新账号"}
-        </a>
+        </Button>
       </ShadowCard>
     </Container>
   );
