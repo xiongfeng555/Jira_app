@@ -4,7 +4,7 @@ import React from "react";
 import ProjectScreen from "screens/project-list";
 import { Row } from "../../components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
-import { Dropdown, Menu } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 export default function AuthenticatedApp() {
   const { logout, user } = useAuth();
   return (
@@ -20,12 +20,16 @@ export default function AuthenticatedApp() {
             overlay={
               <Menu>
                 <Menu.Item key={"logout"}>
-                  <a onClick={logout}>登出</a>
+                  <Button type={"link"} onClick={logout}>
+                    登出
+                  </Button>
                 </Menu.Item>
               </Menu>
             }
           >
-            <a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
+            <Button type={"link"} onClick={(e) => e.preventDefault()}>
+              Hi,{user?.name}
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>

@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
-interface Persons {
-  name: string;
-  age: number;
-}
-const isFalsy = (target: unknown): boolean => {
-  return target === 0 ? false : !target;
-};
-export const cleanObject = (object: object) => {
+// const isFalsy = (target: unknown): boolean => {
+//   return target === 0 ? false : !target;
+// };
+const isVoid = (value: unknown): boolean =>
+  value === "" || value === undefined || value === null;
+export const cleanObject = (object: { [name: string]: unknown }) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
-    // @ts-ignore
     const value = result[key];
-    if (isFalsy(value)) {
-      // @ts-ignore
+    if (isVoid(value)) {
       delete result[key];
     }
   });
@@ -30,6 +26,7 @@ export const useDebounce = <T>(value: T, delay: number = 200): T => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
