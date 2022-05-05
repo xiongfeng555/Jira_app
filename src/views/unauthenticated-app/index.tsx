@@ -27,7 +27,7 @@ export default function UnAuthenticatedApp() {
         )}
         <Divider />
         <Button onClick={() => setRegister(!isRegister)} type="link">
-          切换到{isRegister ? "已经有账号了，直接登录" : "没有账号？注册新账号"}
+          {isRegister ? "已经有账号了，直接登录" : "没有账号？注册新账号"}
         </Button>
       </ShadowCard>
     </Container>

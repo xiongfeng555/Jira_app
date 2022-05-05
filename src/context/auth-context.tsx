@@ -3,8 +3,8 @@ import React, { ReactNode, useContext, useEffect } from "react";
 import { User } from "screens/project-list/Search";
 import { http } from "utils/http";
 import { useAsync } from "utils/use-async";
-import styled from "@emotion/styled";
-import { Spin } from "antd";
+
+import { FullPageLoading } from "../components/lib";
 interface userForm {
   username: string;
   password: string;
@@ -60,14 +60,3 @@ export const useAuth = () => {
   }
   return context;
 };
-const FullPage = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const FullPageLoading = () => (
-  <FullPage>
-    <Spin size="large" />
-  </FullPage>
-);
