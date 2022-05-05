@@ -3,15 +3,18 @@ import { cleanObject, useDebounce } from "utils";
 import List from "./List";
 import Search from "./Search";
 import { useHttp } from "utils/http";
+import { Typography } from "antd";
 import styled from "@emotion/styled";
+import { useAsync } from "utils/use-async";
+import { Project } from "./List";
 export default function ProjectScreen() {
   const [params, setParams] = useState({
     name: "",
     personId: "",
   });
-  const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
   const debouncedParams = useDebounce(params);
+  const { isLoading, run, error, data: projects } = useAsync<Project[]>();
   const client = useHttp();
   useEffect(() => {
     // fetch(
@@ -19,9 +22,20 @@ export default function ProjectScreen() {
     // ).then(async (response) => {
     //   setProjects(await response.json());
     // });
-    client("projects", {
-      data: cleanObject(debouncedParams),
-    }).then((data) => setProjects(data));
+    run(
+      client("projects", {
+        data: cleanObject(debouncedParams),
+      })
+    );
+    // client("projects", {
+    //   data: cleanObject(debouncedParams),
+    // })
+    //   .then((data) => setProjects(data))
+    //   .catch((error) => {
+    //     setProjects([]);
+    //     setError(error);
+    //   })
+    //   .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedParams]);
   useEffect(() => {
@@ -35,7 +49,10 @@ export default function ProjectScreen() {
     <Container>
       <h1>项目列表</h1>
       <Search params={params} setParams={setParams} users={users} />
-      <List projects={projects} users={users} />
+      <Typography.Text type="danger">
+        {error ? error.message : null}
+      </Typography.Text>
+      <List dataSource={projects || []} users={users} loading={isLoading} />
     </Container>
   );
 }

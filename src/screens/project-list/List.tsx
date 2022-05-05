@@ -1,8 +1,8 @@
 import React from "react";
 import { User } from "./Search";
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
-interface Project {
+export interface Project {
   id: number;
   name: string;
   personId: number;
@@ -10,13 +10,10 @@ interface Project {
   created: number;
   ownerId: number;
 }
-interface ListProps {
+interface ListProps extends TableProps<Project> {
   users: User[];
-  projects: Project[];
 }
-const List = (props: ListProps) => {
-  const { projects, users } = props;
-  console.log(projects);
+const List = ({ users, ...props }: ListProps) => {
   return (
     // <table>
     //   <thead>
@@ -40,7 +37,6 @@ const List = (props: ListProps) => {
     //   </tbody>
     // </table>
     <Table
-      dataSource={projects}
       pagination={false}
       columns={[
         {
@@ -73,8 +69,10 @@ const List = (props: ListProps) => {
               </span>
             );
           },
+          sorter: (a, b) => a.created - b.created,
         },
       ]}
+      {...props}
     ></Table>
   );
 };

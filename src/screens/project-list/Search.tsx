@@ -29,6 +29,7 @@ export default function search(props: SearchProps) {
               name: evt.target.value,
             })
           }
+          placeholder="项目名称"
         />
       </Form.Item>
       <Form.Item>
