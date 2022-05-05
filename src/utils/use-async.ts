@@ -37,14 +37,14 @@ export const useAsync = <D>(initState?: State<D>) => {
       ...state,
       stats: "loading",
     });
-    promise
+    return promise
       .then((data) => {
         setData(data);
         return data;
       })
       .catch((error) => {
         setError(error);
-        return error;
+        return Promise.reject(error);
       });
   };
 
