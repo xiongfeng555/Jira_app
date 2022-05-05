@@ -1,7 +1,10 @@
 import * as auth from "../utils/auth-provider";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect } from "react";
 import { User } from "screens/project-list/Search";
 import { http } from "utils/http";
+import { useAsync } from "utils/use-async";
+import styled from "@emotion/styled";
+import { Spin } from "antd";
 interface userForm {
   username: string;
   password: string;
@@ -23,16 +26,26 @@ const AuthContext = React.createContext<{
 } | null>(null);
 AuthContext.displayName = "AuthContext";
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
+  const {
+    run,
+    data: user,
+    isIdle,
+    isLoading,
+    setData: setUser,
+  } = useAsync<User | null>();
   const login = (form: userForm) =>
     auth.login(form).then((user) => setUser(user));
   const register = (form: userForm) =>
     auth.register(form).then((user) => setUser(user));
   const logout = () => auth.logout().then(() => setUser(null));
   useEffect(() => {
-    bootstrapUser().then((user) => setUser(user));
+    run(bootstrapUser());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  if (isIdle || isLoading) {
+    return <FullPageLoading />;
+  }
   return (
     <AuthContext.Provider
       children={children}
@@ -47,3 +60,14 @@ export const useAuth = () => {
   }
   return context;
 };
+const FullPage = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const FullPageLoading = () => (
+  <FullPage>
+    <Spin size="large" />
+  </FullPage>
+);
