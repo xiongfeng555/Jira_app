@@ -1,46 +1,63 @@
 import styled from "@emotion/styled";
 import { useAuth } from "context/auth-context";
 import React from "react";
-import ProjectScreen from "screens/project-list";
+import ProjectListScreen from "screens/project-list";
 import { Row } from "../../components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
 import { useDocumentTitle } from "utils";
+import { Route, Routes, Navigate } from "react-router-dom";
+import ProjectScreen from "screens/project";
 export default function AuthenticatedApp() {
-  const { logout, user } = useAuth();
   useDocumentTitle("jira列表页", false);
   return (
     <Container>
-      <Header between={true}>
-        <HeaderLeft gap={2}>
-          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
-          <h2>项目</h2>
-          <h2>用户</h2>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key={"logout"}>
-                  <Button type={"link"} onClick={logout}>
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Button type={"link"} onClick={(e) => e.preventDefault()}>
-              Hi,{user?.name}
-            </Button>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
+      <PageHeader />
       <main>
-        <ProjectScreen />
+        <Routes>
+          <Route path="/projects" element={<ProjectListScreen />}></Route>
+          <Route
+            path={"/projects/:projectId/*"}
+            element={<ProjectScreen />}
+          ></Route>
+          <Route
+            path="/"
+            element={<Navigate to={"/projects"}></Navigate>}
+          ></Route>
+        </Routes>
       </main>
     </Container>
   );
 }
+const PageHeader = () => {
+  const { logout, user } = useAuth();
+  return (
+    <Header between={true}>
+      <HeaderLeft gap={2}>
+        <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        <h2>项目</h2>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key={"logout"}>
+                <Button type={"link"} onClick={logout}>
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Button type={"link"} onClick={(e) => e.preventDefault()}>
+            Hi,{user?.name}
+          </Button>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
+  );
+};
 const Container = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;

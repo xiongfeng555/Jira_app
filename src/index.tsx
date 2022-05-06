@@ -5,16 +5,19 @@ import App from "./App";
 import { loadServer, DevTools } from "jira-dev-tool";
 import AppProvider from "./context/index";
 import "antd/dist/antd.css";
+import { BrowserRouter as Router } from "react-router-dom";
 loadServer(() => {
   const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
   );
 
   root.render(
-    <AppProvider>
-      <DevTools />
-      <App />
-    </AppProvider>
+    <Router>
+      <AppProvider>
+        <DevTools />
+        <App />
+      </AppProvider>
+    </Router>
   );
 });
 

@@ -2,6 +2,7 @@ import React from "react";
 import { User } from "./Search";
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 export interface Project {
   id: number;
   name: string;
@@ -41,7 +42,9 @@ const List = ({ users, ...props }: ListProps) => {
       columns={[
         {
           title: "项目名称",
-          dataIndex: "name",
+          render(value, project, index) {
+            return <Link to={project.id + ""}>{project.name}</Link>;
+          },
         },
         {
           title: "部门",

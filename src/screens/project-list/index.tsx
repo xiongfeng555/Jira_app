@@ -7,7 +7,7 @@ import { Typography } from "antd";
 import styled from "@emotion/styled";
 import { useAsync } from "utils/use-async";
 import { Project } from "./List";
-export default function ProjectScreen() {
+export default function ProjectListScreen() {
   const [params, setParams] = useState({
     name: "",
     personId: "",
