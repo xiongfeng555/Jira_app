@@ -52,3 +52,21 @@ export const useArray = <T>(persons: T[]) => {
     add,
   };
 };
+
+export const useDocumentTitle = (
+  title: string,
+  keepOnunMount: boolean = true
+) => {
+  const oldTitle = document.title;
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+  useEffect(() => {
+    return () => {
+      if (!keepOnunMount) {
+        document.title = oldTitle;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+};

@@ -6,9 +6,11 @@ import styled from "@emotion/styled";
 import logo from "../../assets/logo.svg";
 import left from "../../assets/left.svg";
 import right from "../../assets/right.svg";
+
 export default function UnAuthenticatedApp() {
   const [isRegister, setRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+
   return (
     <Container>
       <Background></Background>
