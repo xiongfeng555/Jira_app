@@ -6,7 +6,7 @@ import { Row } from "../../components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
 import { useDocumentTitle } from "utils";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, Link } from "react-router-dom";
 import ProjectScreen from "screens/project";
 export default function AuthenticatedApp() {
   useDocumentTitle("jira列表页", false);
@@ -34,7 +34,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={2}>
-        <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        <Link to={"/"} style={{ display: "flex", alignItems: "center" }}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        </Link>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>
