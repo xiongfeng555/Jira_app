@@ -7,11 +7,9 @@ import { Typography } from "antd";
 import styled from "@emotion/styled";
 import { useAsync } from "utils/use-async";
 import { Project } from "./List";
+import { useUrlQueryParm } from "utils/url";
 export default function ProjectListScreen() {
-  const [params, setParams] = useState({
-    name: "",
-    personId: "",
-  });
+  const [params, setParams] = useUrlQueryParm(["name", "personId"]);
   const [users, setUsers] = useState([]);
   const debouncedParams = useDebounce(params);
   const { isLoading, run, error, data: projects } = useAsync<Project[]>();
