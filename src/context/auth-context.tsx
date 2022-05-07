@@ -9,6 +9,7 @@ interface userForm {
   username: string;
   password: string;
 }
+
 const bootstrapUser = async () => {
   let user = null;
   const token = auth.getToken();
