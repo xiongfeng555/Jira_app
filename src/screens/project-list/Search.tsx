@@ -1,5 +1,6 @@
 import React from "react";
-import { Input, Select, Form } from "antd";
+import { Input, Form } from "antd";
+import IdSelect from "components/id-select";
 export interface User {
   id: number;
   name: string;
@@ -33,24 +34,17 @@ export default function search(props: SearchProps) {
         />
       </Form.Item>
       <Form.Item>
-        <Select
-          defaultValue="负责人"
-          onChange={(value) =>
+        <IdSelect
+          value={params.personId}
+          defaultOptionName="负责人"
+          options={users}
+          onChange={(value) => {
             setParams({
               ...params,
-              personId: value,
-            })
-          }
-        >
-          <Select.Option value="">负责人</Select.Option>
-          {users.map((item) => {
-            return (
-              <Select.Option value={item.id} key={item.id}>
-                {item.name}
-              </Select.Option>
-            );
-          })}
-        </Select>
+              personId: String(value),
+            });
+          }}
+        ></IdSelect>
       </Form.Item>
     </Form>
   );
