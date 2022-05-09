@@ -1,8 +1,18 @@
+/*
+ * @Author: xiongfeng '343138759@qq.com'
+ * @Date: 2022-04-28 20:16:30
+ * @LastEditors: xiongfeng '343138759@qq.com'
+ * @LastEditTime: 2022-05-08 19:01:04
+ * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\List.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from "react";
 import { User } from "./Search";
-import { Table, TableProps } from "antd";
+import { Button, Dropdown, Menu, Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import Pin from "components/pin";
+import { useEditProject } from "utils/use-edit-project";
 export interface Project {
   id: number;
   name: string;
@@ -10,11 +20,14 @@ export interface Project {
   organization: string;
   created: number;
   ownerId: number;
+  pin: boolean;
 }
 interface ListProps extends TableProps<Project> {
   users: User[];
+  open: (isOpen: boolean) => void;
 }
 const List = ({ users, ...props }: ListProps) => {
+  const { mutate } = useEditProject();
   return (
     // <table>
     //   <thead>
@@ -40,6 +53,19 @@ const List = ({ users, ...props }: ListProps) => {
     <Table
       pagination={false}
       columns={[
+        {
+          title: <Pin checked={true} />,
+          render(value, project) {
+            return (
+              <Pin
+                checked={project.pin}
+                onCheckedChange={(pin) => {
+                  mutate({ id: project.id, pin });
+                }}
+              />
+            );
+          },
+        },
         {
           title: "项目名称",
           render(value, project, index) {
@@ -73,6 +99,32 @@ const List = ({ users, ...props }: ListProps) => {
             );
           },
           sorter: (a, b) => a.created - b.created,
+        },
+        {
+          title: "编辑",
+          render(value, project) {
+            return (
+              <Dropdown
+                overlay={
+                  <Menu>
+                    <Menu.Item key={"edit"}>
+                      <Button
+                        style={{ padding: "0px" }}
+                        type="link"
+                        onClick={() => props.open(true)}
+                      >
+                        编辑
+                      </Button>
+                    </Menu.Item>
+                  </Menu>
+                }
+              >
+                <Button style={{ padding: "0px" }} type="link">
+                  ...
+                </Button>
+              </Dropdown>
+            );
+          },
         },
       ]}
       {...props}
