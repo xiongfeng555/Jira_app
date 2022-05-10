@@ -51,7 +51,7 @@ const PageHeader = (props: { openProjectModal: () => void }) => {
     <Header between={true}>
       <HeaderLeft gap={2}>
         <Link to={"/"} style={{ display: "flex", alignItems: "center" }}>
-          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+          <SoftwareLogo width={"19rem"} color={"rgb(38,132,255)"} />
         </Link>
         <ProjectPopover open={props.openProjectModal} />
         <span>用户</span>
