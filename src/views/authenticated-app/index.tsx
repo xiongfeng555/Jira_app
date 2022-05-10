@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-02 14:48:07
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-10 14:18:01
+ * @LastEditTime: 2022-05-10 18:02:47
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\views\authenticated-app\index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,16 +21,19 @@ import ProjectPopover from "screens/project-list/project-popover";
 import { useProjectModal } from "utils/use-projectModal";
 export default function AuthenticatedApp() {
   useDocumentTitle("jira列表页", false);
-  const { projectModalOpen, open, close } = useProjectModal();
+  const modalProps = useProjectModal();
   return (
     <Container>
-      <ProjectModel projectModalOpen={projectModalOpen} onClose={close} />
-      <PageHeader openProjectModal={open} />
+      <ProjectModel
+        projectModalOpen={modalProps.projectModalOpen}
+        onClose={modalProps.close}
+      />
+      <PageHeader openProjectModal={modalProps.open} />
       <main>
         <Routes>
           <Route
             path="/projects"
-            element={<ProjectListScreen open={open} />}
+            element={<ProjectListScreen {...modalProps} />}
           ></Route>
           <Route
             path={"/projects/:projectId/*"}

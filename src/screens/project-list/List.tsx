@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-04-28 20:16:30
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-10 10:54:19
+ * @LastEditTime: 2022-05-10 18:51:34
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\List.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,7 +27,12 @@ export interface Project {
 }
 interface ListProps extends TableProps<Project> {
   users: User[];
-  open: (isOpen: boolean) => void;
+  projectModalOpen: boolean;
+  open: () => void;
+  startEdit: (id: number) => void;
+  editingProject: Project;
+  close: () => void;
+  isLoading: boolean;
 }
 const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
@@ -121,9 +126,20 @@ const List = ({ users, ...props }: ListProps) => {
                       <Button
                         style={{ padding: "0px" }}
                         type="link"
-                        onClick={() => props.open(true)}
+                        onClick={() => {
+                          props.startEdit(project.id);
+                        }}
                       >
                         编辑
+                      </Button>
+                    </Menu.Item>
+                    <Menu.Item key={"delete"}>
+                      <Button
+                        style={{ padding: "0px" }}
+                        type="link"
+                        onClick={() => props.open()}
+                      >
+                        删除
                       </Button>
                     </Menu.Item>
                   </Menu>
