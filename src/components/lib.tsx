@@ -39,3 +39,9 @@ export const FullPageErrorFallback = ({
     <Typography.Text type="danger">{error?.message}</Typography.Text>
   </FullPage>;
 };
+export const DisplayError = (error: any) => {
+  if (error?.message) {
+    return <Typography.Text type="danger">{error.message}</Typography.Text>;
+  }
+  return null;
+};
