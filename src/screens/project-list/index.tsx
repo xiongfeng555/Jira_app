@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-04-28 19:58:28
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-10 18:49:38
+ * @LastEditTime: 2022-05-11 14:58:19
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,7 +22,6 @@ import { projectModalProps } from "utils/use-projectModal";
 export default function ProjectListScreen(props: projectModalProps) {
   const [params, setParams] = useUrlQueryParm(["name", "personId"]);
   const [users, setUsers] = useState([]);
-  const debouncedParams = useDebounce(params);
   const { isLoading, error, run } = useAsync<Project[]>();
   const client = useHttp();
   const questLists = useProjects();
@@ -44,7 +43,7 @@ export default function ProjectListScreen(props: projectModalProps) {
     //   })
     //   .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedParams]);
+  }, []);
   useEffect(() => {
     // fetch(`${baseURL}/users`).then(async (response) => {
     //   setUsers(await response.json());
