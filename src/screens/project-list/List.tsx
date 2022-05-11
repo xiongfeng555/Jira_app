@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-04-28 20:16:30
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-11 15:37:19
+ * @LastEditTime: 2022-05-11 16:06:55
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\List.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -113,7 +113,7 @@ const List = ({ users, ...props }: ListProps) => {
           sorter: (a, b) => a.created - b.created,
         },
         {
-          title: "编辑",
+          title: "操作",
           render(value, project) {
             return (
               <Dropdown

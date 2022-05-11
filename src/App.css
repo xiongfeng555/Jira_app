@@ -4,3 +4,6 @@ html {
 html body #root .App {
   min-height: 90vh;
 }
+.ant-drawer-header-title {
+  justify-content: flex-end !important;
+}
