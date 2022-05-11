@@ -1,5 +1,9 @@
 import { Project } from "screens/project-list/List";
-import { SET_PROJECT_LIST, PATCH_LIST_FAVORITE } from "../contant";
+import {
+  SET_PROJECT_LIST,
+  PATCH_LIST_FAVORITE,
+  DELETE_PROJECT,
+} from "../contant";
 const initState: Project[] | [] = [];
 export default function projectListReducer(
   state: typeof initState = initState,
@@ -13,6 +17,12 @@ export default function projectListReducer(
       const target = state.find((project) => project.id === data);
       if (target) {
         target.pin = !target?.pin;
+      }
+      return [...state];
+    case DELETE_PROJECT:
+      const index = state.findIndex((project) => project.id === data);
+      if (index > -1) {
+        state.splice(index, 1);
       }
       return [...state];
     default:

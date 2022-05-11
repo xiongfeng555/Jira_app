@@ -2,19 +2,24 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-04-28 20:16:30
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-11 10:50:56
+ * @LastEditTime: 2022-05-11 15:37:19
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\List.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React from "react";
 import { User } from "./Search";
-import { Button, Dropdown, Menu, Table, TableProps } from "antd";
+import { Button, Dropdown, Menu, Modal, Table, TableProps } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import Pin from "components/pin";
-import { useEditProject } from "utils/use-edit-project";
+import { useDeleteProject, useEditProject } from "utils/use-edit-project";
 import store from "redux/store";
-import { createPatchListFavoriteAction } from "../../redux/actions";
+
+import {
+  createPatchListFavoriteAction,
+  createDeleteProjectAction,
+} from "../../redux/actions";
 export interface Project {
   id: number;
   name: string;
@@ -36,28 +41,23 @@ interface ListProps extends TableProps<Project> {
 const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
   const { projectLists } = store.getState();
+  const { mutateAsync } = useDeleteProject();
+  const deleteProject = (id: number) => {
+    return () => {
+      Modal.confirm({
+        title: "您确定删除这个项目吗？",
+        icon: <ExclamationCircleOutlined />,
+        content: "点击确定删除",
+        cancelText: "取消",
+        okText: "确定",
+        onOk() {
+          store.dispatch(createDeleteProjectAction(id));
+          mutateAsync(id);
+        },
+      });
+    };
+  };
   return (
-    // <table>
-    //   <thead>
-    //     <tr>
-    //       <th>名称</th>
-    //       <th>负责人</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {projects.map((item) => {
-    //       return (
-    //         <tr key={item.id}>
-    //           <td>{item.name}</td>
-    //           <td>
-    //             {users.find((user) => user.id === item.personId)?.name ||
-    //               "未知"}
-    //           </td>
-    //         </tr>
-    //       );
-    //     })}
-    //   </tbody>
-    // </table>
     <Table
       dataSource={projectLists}
       pagination={false}
@@ -134,7 +134,7 @@ const List = ({ users, ...props }: ListProps) => {
                       <Button
                         style={{ padding: "0px" }}
                         type="link"
-                        onClick={() => props.open()}
+                        onClick={deleteProject(project.id)}
                       >
                         删除
                       </Button>
