@@ -1,3 +1,11 @@
+/*
+ * @Author: xiongfeng '343138759@qq.com'
+ * @Date: 2022-05-08 15:46:23
+ * @LastEditors: xiongfeng '343138759@qq.com'
+ * @LastEditTime: 2022-05-12 09:21:19
+ * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\project-model.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React, { useEffect, useState } from "react";
 import { Drawer, Button, Spin, Form, Input } from "antd";
 import { useProjectModal } from "utils/use-projectModal";
@@ -26,6 +34,10 @@ export default function ProjectModel(props: {
       close();
     });
   };
+  const closeModal = () => {
+    form.resetFields();
+    close();
+  };
   useEffect(() => {
     form.setFieldsValue(editingProject);
   }, [editingProject, form]);
@@ -38,7 +50,7 @@ export default function ProjectModel(props: {
       visible={props.projectModalOpen}
       width="100%"
       height={"100vh"}
-      onClose={close}
+      onClose={closeModal}
       forceRender={true}
     >
       {isLoading ? (
