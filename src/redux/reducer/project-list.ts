@@ -3,11 +3,13 @@ import {
   SET_PROJECT_LIST,
   PATCH_LIST_FAVORITE,
   DELETE_PROJECT,
+  EDIT_PROJECT_ITEM,
+  ADD_PROJECT_ITEM,
 } from "../contant";
 const initState: Project[] | [] = [];
 export default function projectListReducer(
   state: typeof initState = initState,
-  actions: { data: Project[] | number; type: string }
+  actions: { data: any; type: string }
 ) {
   const { data, type } = actions;
   switch (type) {
@@ -24,6 +26,12 @@ export default function projectListReducer(
       if (index > -1) {
         state.splice(index, 1);
       }
+      return [...state];
+    case ADD_PROJECT_ITEM:
+      return [...state, data];
+    case EDIT_PROJECT_ITEM:
+      const findIndex = state.findIndex((project) => project.id === data.id);
+      state.splice(findIndex, 1, data);
       return [...state];
     default:
       return state;

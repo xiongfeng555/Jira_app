@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-08 15:46:23
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-12 09:32:42
+ * @LastEditTime: 2022-05-12 09:54:25
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\project-model.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -16,6 +16,12 @@ import { DisplayError } from "components/lib";
 import { useHttp } from "utils/http";
 import { User } from "./Search";
 import styled from "@emotion/styled";
+import store from "redux/store";
+import {
+  createAddProjectAction,
+  createEditProjectAction,
+} from "../../redux/actions";
+import dayjs from "dayjs";
 
 export default function ProjectModel(props: {
   projectModalOpen: boolean;
@@ -30,6 +36,18 @@ export default function ProjectModel(props: {
   const [users, setUsers] = useState<User[] | []>([]);
   const onFinish = (values: any) => {
     mutateAsync({ ...editingProject, ...values }).then(() => {
+      if (editingProject) {
+        store.dispatch(
+          createEditProjectAction({ ...editingProject, ...values })
+        );
+      } else {
+        store.dispatch(
+          createAddProjectAction({
+            ...values,
+            created: dayjs(new Date().getTime()).format("YYYY-MM-DD"),
+          })
+        );
+      }
       form.resetFields();
       close();
     });
