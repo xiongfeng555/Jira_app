@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-08 15:46:23
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-12 09:21:19
+ * @LastEditTime: 2022-05-12 09:32:42
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project-list\project-model.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -53,43 +53,49 @@ export default function ProjectModel(props: {
       onClose={closeModal}
       forceRender={true}
     >
-      {isLoading ? (
-        <Spin size="large" />
-      ) : (
-        <Container>
-          <h1>{title}</h1>
-          <DisplayError error={error} />
-          <Form
-            form={form}
-            layout="vertical"
-            style={{ width: "40rem" }}
-            onFinish={onFinish}
-          >
-            <Form.Item
-              label="名称"
-              name={"name"}
-              rules={[{ required: true, message: "请输入项目名称" }]}
+      <Container>
+        {isLoading ? (
+          <Spin size="large" />
+        ) : (
+          <>
+            <h1>{title}</h1>
+            <DisplayError error={error} />
+            <Form
+              form={form}
+              layout="vertical"
+              style={{ width: "40rem" }}
+              onFinish={onFinish}
             >
-              <Input placeholder="请输入项目名称"></Input>
-            </Form.Item>
-            <Form.Item
-              label="部门"
-              name={"organization"}
-              rules={[{ required: true, message: "请输入部门名称" }]}
-            >
-              <Input placeholder="请输入部门名称"></Input>
-            </Form.Item>
-            <Form.Item label="负责人" name={"personId"}>
-              <IdSelect defaultOptionName="负责人" options={users}></IdSelect>
-            </Form.Item>
-            <Form.Item style={{ textAlign: "center" }}>
-              <Button type="primary" htmlType="submit" loading={mutateLoading}>
-                {editingProject ? "保存" : "提交"}
-              </Button>
-            </Form.Item>
-          </Form>
-        </Container>
-      )}
+              <Form.Item
+                label="名称"
+                name={"name"}
+                rules={[{ required: true, message: "请输入项目名称" }]}
+              >
+                <Input placeholder="请输入项目名称"></Input>
+              </Form.Item>
+              <Form.Item
+                label="部门"
+                name={"organization"}
+                rules={[{ required: true, message: "请输入部门名称" }]}
+              >
+                <Input placeholder="请输入部门名称"></Input>
+              </Form.Item>
+              <Form.Item label="负责人" name={"personId"}>
+                <IdSelect defaultOptionName="负责人" options={users}></IdSelect>
+              </Form.Item>
+              <Form.Item style={{ textAlign: "center" }}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={mutateLoading}
+                >
+                  {editingProject ? "保存" : "提交"}
+                </Button>
+              </Form.Item>
+            </Form>
+          </>
+        )}
+      </Container>
     </Drawer>
   );
 }
