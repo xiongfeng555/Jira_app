@@ -14,7 +14,7 @@ import { useAddProject, useEditProject } from "utils/use-edit-project";
 import { useForm } from "antd/lib/form/Form";
 import { DisplayError } from "components/lib";
 import { useHttp } from "utils/http";
-import { User } from "./Search";
+import { User } from "../../types/User";
 import styled from "@emotion/styled";
 import store from "redux/store";
 import {

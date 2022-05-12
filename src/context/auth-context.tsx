@@ -1,6 +1,6 @@
 import * as auth from "../utils/auth-provider";
 import React, { ReactNode, useContext, useEffect } from "react";
-import { User } from "screens/project-list/Search";
+import { User } from "types/User";
 import { http } from "utils/http";
 import { useAsync } from "utils/use-async";
 

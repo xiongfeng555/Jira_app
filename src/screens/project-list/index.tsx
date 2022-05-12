@@ -13,7 +13,7 @@ import { useHttp } from "utils/http";
 import { Button, Typography } from "antd";
 import styled from "@emotion/styled";
 import { useAsync } from "utils/use-async";
-import { Project } from "./List";
+import { Project } from "../../types/Project";
 import { useUrlQueryParm } from "utils/url";
 import { Row } from "components/lib";
 import { useProjects } from "utils/use-projects";

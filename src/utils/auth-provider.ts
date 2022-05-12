@@ -1,4 +1,4 @@
-import { User } from "screens/project-list/Search";
+import { User } from "types/User";
 
 const provider_token = "__auth_provider_token__";
 const baseURL = process.env.REACT_APP_API_URL;
