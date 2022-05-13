@@ -1,10 +1,16 @@
 import styled from "@emotion/styled";
 import { Spin, Typography } from "antd";
 import { DevTools } from "jira-dev-tool";
-export const Row = styled.div<{ gap?: number | boolean; between?: boolean }>`
+export const Row = styled.div<{
+  gap?: number | boolean;
+  between?: boolean;
+  marginBottom?: number;
+}>`
   display: flex;
   align-items: center;
   justify-content: ${(props) => (props.between ? "space-between" : undefined)};
+  margin-bottom: ${(props) =>
+    props.marginBottom ? props.marginBottom + "px" : 0};
   > * {
     margin-top: 0;
     margin-bottom: 0;
