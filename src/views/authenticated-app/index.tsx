@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-02 14:48:07
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-10 18:02:47
+ * @LastEditTime: 2022-05-14 15:59:01
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\views\authenticated-app\index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -24,12 +24,8 @@ export default function AuthenticatedApp() {
   const modalProps = useProjectModal();
   return (
     <Container>
-      <ProjectModel
-        projectModalOpen={modalProps.projectModalOpen}
-        onClose={modalProps.close}
-      />
       <PageHeader openProjectModal={modalProps.open} />
-      <main>
+      <Main>
         <Routes>
           <Route
             path="/projects"
@@ -44,7 +40,11 @@ export default function AuthenticatedApp() {
             element={<Navigate to={"/projects"}></Navigate>}
           ></Route>
         </Routes>
-      </main>
+      </Main>
+      <ProjectModel
+        projectModalOpen={modalProps.projectModalOpen}
+        onClose={modalProps.close}
+      />
     </Container>
   );
 }
@@ -82,6 +82,7 @@ const PageHeader = (props: { openProjectModal: () => void }) => {
 const Container = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;
+  height: 100vh;
 `;
 const Header = styled(Row)`
   padding: 3.2rem;
@@ -90,3 +91,7 @@ const Header = styled(Row)`
 `;
 const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;
+const Main = styled.main`
+  display: flex;
+  overflow: hidden;
+`;
