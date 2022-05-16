@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-06 10:14:06
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-14 16:04:40
+ * @LastEditTime: 2022-05-16 15:28:04
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\project\index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -54,6 +54,7 @@ const Aside = styled.div`
 const Main = styled.main`
   box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.1);
   display: flex;
+  overflow: hidden;
 `;
 const Container = styled.div`
   display: grid;
