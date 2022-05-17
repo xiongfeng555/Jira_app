@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-12 14:55:18
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-17 16:00:51
+ * @LastEditTime: 2022-05-17 16:11:22
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\kanban\kanban-colunm.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -88,7 +88,7 @@ const More = ({ kanban }: { kanban: Kanban }) => {
       cancelText: "取消",
       title: "确定删除看板吗？",
       onOk() {
-        return mutateAsync(Number(kanban.id));
+        return mutateAsync({ id: Number(kanban.id) });
       },
     });
   };

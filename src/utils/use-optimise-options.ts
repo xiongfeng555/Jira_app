@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2021-11-02 14:24:27
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-16 16:19:33
+ * @LastEditTime: 2022-05-17 16:16:01
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\imooc-jira-master\src\utils\use-optimistic-options.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -30,11 +30,13 @@ export const useConfig = (
   };
 };
 
-export const useDeleteConfig = (queryKey: QueryKey) =>
-  useConfig(
+export const useDeleteConfig = (queryKey: QueryKey) => {
+  return useConfig(
     queryKey,
     (target, old) => old?.filter((item) => item.id !== target.id) || []
   );
+};
+
 export const useEditConfig = (queryKey: QueryKey) =>
   useConfig(
     queryKey,
