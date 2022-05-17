@@ -2,7 +2,7 @@
  * @Author: xiongfeng '343138759@qq.com'
  * @Date: 2022-05-06 11:01:04
  * @LastEditors: xiongfeng '343138759@qq.com'
- * @LastEditTime: 2022-05-16 18:09:01
+ * @LastEditTime: 2022-05-17 14:02:59
  * @FilePath: \Typescript练习d:\王者农药plus\web前端\慕课网react项目\jira\src\screens\kanban\index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -25,6 +25,7 @@ import { useTasks } from "utils/use-task";
 import CreateKanban from "./create-kanban";
 import KanbanColunm from "./kanban-colunm";
 import SearchPanel from "./search-panel";
+import TaskModal from "./task-modal";
 import { useKanbanSearchParams, useProjectInUrl } from "./util";
 
 export default function KanPanScreen() {
@@ -52,6 +53,7 @@ export default function KanPanScreen() {
           <CreateKanban />
         </ColumnsContainer>
       )}
+      <TaskModal />
     </ScreenContainer>
   );
 }
